@@ -1,8 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './style.css';
 import mapImage from './img/map.svg';
 
 export const JourneyPicker = () => {
+  const [fromCity, setFromCity] = useState(' ');
+  const [toCity, setToCity] = useState(' ');
+  const [date, setDate] = useState(' ');
+
+  const handleFromCityChange = (e) => {
+    console.log(e.target.value);
+  };
+  const handleToCityChange = (e) => {
+    console.log(e.target.value);
+  };
+  const handleDateChange = (e) => {
+    console.log(e.target.value);
+  };
+
+  const handleSubmit = () => {
+    console.log(fromCity, toCity, date);
+  };
+
   return (
     <div class="journey-picker container">
       <h2 class="journey-picker__head">Kam chcete jet?</h2>
@@ -10,7 +28,7 @@ export const JourneyPicker = () => {
         <form class="journey-picker__form">
           <label>
             <div class="journey-picker__label">Odkud:</div>
-            <select>
+            <select onChange={handleFromCityChange}>
               <option value="">Vyberte</option>
               <option value="Mesto1">Město 1</option>
               <option value="Mesto2">Město 2</option>
@@ -20,7 +38,7 @@ export const JourneyPicker = () => {
           </label>
           <label>
             <div class="journey-picker__label">Kam:</div>
-            <select>
+            <select onChange={handleToCityChange}>
               <option value="">Vyberte</option>
               <option value="Mesto1">Město 1</option>
               <option value="Mesto2">Město 2</option>
@@ -30,7 +48,7 @@ export const JourneyPicker = () => {
           </label>
           <label>
             <div class="journey-picker__label">Datum:</div>
-            <select>
+            <select onChange={handleDateChange}>
               <option value="">Vyberte</option>
               <option>20.05.2021</option>
               <option>21.05.2021</option>
@@ -39,7 +57,7 @@ export const JourneyPicker = () => {
             </select>
           </label>
           <div class="journey-picker__controls">
-            <button class="btn" type="submit">
+            <button onClick={handleSubmit} class="btn" type="submit">
               Vyhledat spoj
             </button>
           </div>
