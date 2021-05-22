@@ -1,16 +1,4 @@
 header {
-  padding-left: 2rem;
-  padding-right: 2rem;
-}
-
-@media only screen and (min-width: 768px) {
-  header {
-    padding-left: 0;
-    padding-right: 0;
-  }
-}
-
-header {
   padding-top: 1px;
   height: 305px;
 
@@ -20,4 +8,15 @@ header {
   background-size: contain;
   background-position: center bottom;
   background-repeat: no-repeat;
+}
+
+.site-title {
+  margin: 0.5rem 0;
+}
+
+.site-title a,
+.site-title a:active,
+.site-title a:visited {
+  color: white;
+  text-decoration: none;
 }
