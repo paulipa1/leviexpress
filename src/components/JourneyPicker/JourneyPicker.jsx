@@ -4,10 +4,10 @@ import mapImage from './img/map.svg';
 import { CityOptions } from './CityOptions/CityOptions';
 import { DatesOptions } from './DatesOptions/DatesOptions';
 
-export const JourneyPicker = () => {
-  const [fromCity, setFromCity] = useState(' ');
-  const [toCity, setToCity] = useState(' ');
-  const [date, setDate] = useState(' ');
+export const JourneyPicker = ({ onJourneyChange }) => {
+  const [fromCity, setFromCity] = useState('');
+  const [toCity, setToCity] = useState('');
+  const [date, setDate] = useState('');
 
   const [cities, setCities] = useState([]);
   const [dates, setDates] = useState([]);
@@ -21,20 +21,29 @@ export const JourneyPicker = () => {
       .then((json) => setDates(json.data));
   }, []);
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // console.log(
+    //   `Odosielam formulár s cestou od ${fromCity} do ${toCity} dňa ${date}`,
+    // );
+    fetch(
+      `https://leviexpress-backend.herokuapp.com/api/journey?fromCity=${fromCity}&toCity=${toCity}&date=${date}`,
+    )
+      .then((response) => response.json())
+      .then((json) => onJourneyChange(json.data));
+  };
+
   const handleFromCityChange = (e) => {
+    setFromCity(e.target.value);
     console.log(e.target.value);
   };
   const handleToCityChange = (e) => {
+    setToCity(e.target.value);
     console.log(e.target.value);
   };
   const handleDateChange = (e) => {
+    setDate(e.target.value);
     console.log(e.target.value);
-  };
-
-  const handleSubmit = () => {
-    console.log(
-      `Odosielam formulár s cestou od ${fromCity} do ${toCity} dňa ${date}`,
-    );
   };
 
   return (
@@ -61,7 +70,11 @@ export const JourneyPicker = () => {
             </select>
           </label>
           <div class="journey-picker__controls">
-            <button class="btn" type="submit">
+            <button
+              disabled={fromCity === '' || toCity === '' || date === ''}
+              class="btn"
+              type="submit"
+            >
               Vyhledat spoj
             </button>
           </div>
